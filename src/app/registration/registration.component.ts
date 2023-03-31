@@ -117,14 +117,14 @@ export class RegistrationComponent implements OnInit {
     try {
       const postObj = new PostPass();
       this.populatePassObj(postObj);
-      this.submitRes = await this.passService.createPass(postObj, this.park.sk, this.regData.passType.sk);
+      this.submitRes = await this.passService.createPass(postObj, this.park.orcs, this.regData.passType.sk);
       this.backButtonText = '';
       this.toastService.addMessage(`Pass successfully registered.`, `Success`, Constants.ToastTypes.SUCCESS);
     } catch (error) {
       this.scrollToTop();
       this.backButtonText = 'Retry';
       this.state = 'failure';
-      this.facilityService.fetchData(null, this.park.sk);
+      this.facilityService.fetchData(null, this.park.orcs);
       this.errorContent = error.error;
       return;
     }
@@ -149,7 +149,7 @@ export class RegistrationComponent implements OnInit {
     );
     const visitUTCISODate = visitDateTime.toUTC().toISO();
     // Mandatory fields:
-    obj.parkOrcs = this.park.sk
+    obj.parkOrcs = this.park.orcs
     obj.firstName = this.regData.firstName;
     obj.lastName = this.regData.lastName;
     obj.facilityName = this.regData.passType.name;

@@ -15,13 +15,13 @@ export class ParkDetailsComponent implements OnInit {
   ngOnInit(): void {
     if (this.park) {
       this.altText = this.park.name + ' Image';
-      let altUrl = `${this.configService.config['ASSETS_S3_URL']}/images/${this.park.sk}/alt.webp`;
+      let altUrl = `${this.configService.config['ASSETS_S3_URL']}/images/${this.park.orcs}/alt.webp`;
 
       this.checkIfImageExists(altUrl, exists => {
         if (exists) {
           this.url = altUrl;
         } else {
-          this.url = `${this.configService.config['ASSETS_S3_URL']}/images/${this.park.sk}/card.webp`;
+          this.url = `${this.configService.config['ASSETS_S3_URL']}/images/${this.park.orcs}/card.webp`;
         }
       });
     }

@@ -37,21 +37,21 @@ export class FacilityService {
     return this.list.asObservable();
   }
 
-  async fetchData(facilitySk = null, parkSk = null) {
+  async fetchData(facilitySk = null, parkOrcs = null) {
     let res = null;
     let errorSubject = '';
     try {
-      if (!facilitySk && parkSk) {
+      if (!facilitySk && parkOrcs) {
         // We are getting a facilities of a given park.
         errorSubject = 'facilities';
-        this.loggerService.debug(`Facility GET: ${parkSk}`);
-        res = await this.apiService.get('facility', { park: parkSk, facilities: true });
+        this.loggerService.debug(`Facility GET: ${parkOrcs}`);
+        res = await this.apiService.get('facility', { park: parkOrcs, facilities: true });
         this.setListValue(res);
-      } else if (facilitySk && parkSk) {
+      } else if (facilitySk && parkOrcs) {
         errorSubject = 'facility';
         // we're getting a single item for a given park
-        this.loggerService.debug(`Facility GET: ${parkSk} ${facilitySk}`);
-        res = await this.apiService.get('facility', { facilityName: facilitySk, park: parkSk });
+        this.loggerService.debug(`Facility GET: ${parkOrcs} ${facilitySk}`);
+        res = await this.apiService.get('facility', { facilityName: facilitySk, park: parkOrcs });
         this.setItemValue(res[0]);
       } else {
         // We're getting a list

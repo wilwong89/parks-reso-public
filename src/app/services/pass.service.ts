@@ -30,19 +30,19 @@ export class PassService {
   //   "facilityType": "Trail"
   // }
 
-  async createPass(obj, parkSk, facilitySk) {
+  async createPass(obj, parkOrcs, facilitySk) {
     let res = null;
     try {
       // Remove non-valid fields and verify field types.
       this.checkManditoryFields(obj);
-      if (parkSk === '' || !parkSk) {
+      if (parkOrcs === '' || !parkOrcs) {
         throw ('You must provide a park sk');
       }
       if (facilitySk === '' || !facilitySk) {
         throw ('You must provide a facility sk');
       }
       let postObj = new PostPass(obj);
-      postObj.parkOrcs = parkSk;
+      postObj.parkOrcs = parkOrcs;
       postObj.facilityName = facilitySk;
       this.loggerService.debug(`Pass POST: ${JSON.stringify(postObj)}`);
       res = await this.apiService.post('pass', postObj);

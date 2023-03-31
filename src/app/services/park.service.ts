@@ -37,15 +37,15 @@ export class ParkService {
     return this.list.asObservable();
   }
 
-  async fetchData(sk = null) {
+  async fetchData(orcs = null) {
     let res = null;
     let errorSubject = '';
     try {
-      if (sk) {
+      if (orcs) {
         // we're getting a single item
         errorSubject = 'park';
-        this.loggerService.debug(`Park GET: ${sk}`);
-        res = await this.apiService.get('park', { park: sk });
+        this.loggerService.debug(`Park GET: ${orcs}`);
+        res = await this.apiService.get('park', { park: orcs });
         // TODO: checks before sending back item.
         this.setItemValue(res[0]);
       } else {

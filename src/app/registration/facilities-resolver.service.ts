@@ -16,7 +16,7 @@ export class FacilitiesResolverService implements Resolve<void> {
     } else {
       const park = this.router.getCurrentNavigation().extras.state.park;
       this.facilityService.clearListValue();
-      this.facilityService.fetchData(null, park.sk);
+      this.facilityService.fetchData(null, park.orcs);
     }
   }
 }
